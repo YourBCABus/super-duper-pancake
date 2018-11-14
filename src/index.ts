@@ -68,10 +68,11 @@ async function fetchFromGoogleMaps() {
           })));
 
           let i;
-          let previousDate = departureDate;
+          let perStopDelay = 15;
+          let previousDate = new Date(departureDate.getTime() - perStopDelay * 1000);
           for (i = 0; i < stops.length; i++) {
             if (results[i].routes.length > 0 && results[i].routes[0].legs.length > 0) {
-              previousDate = new Date(previousDate.getTime() + results[i].routes[0].legs[0].duration_in_traffic.value * 1000);
+              previousDate = new Date(previousDate.getTime() + results[i].routes[0].legs[0].duration_in_traffic.value * 1000 + perStopDelay * 1000);
               await rp.patch(`https://db.yourbcabus.com/schools/${config.school}/buses/${bus._id}/stops/${stops[i]._id}`, {
                 json: {arrival_time: previousDate, invalidate_time: invalidateDate},
                 headers: {Authorization: `Basic ${config.token}`}
