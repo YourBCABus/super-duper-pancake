@@ -68,7 +68,7 @@ async function fetchFromGoogleMaps() {
           })));
 
           let i;
-          let perStopDelay = 15;
+          let perStopDelay = 25;
           let previousDate = new Date(departureDate.getTime() - perStopDelay * 1000);
           for (i = 0; i < stops.length; i++) {
             if (results[i].routes.length > 0 && results[i].routes[0].legs.length > 0) {
