@@ -113,4 +113,7 @@ async function fetchFromGoogleMaps() {
 
 fetchFromGoogleMaps().then(() => {
   console.log("Done");
+}).catch(e => {
+  console.log("Oh noes! Error:");
+  console.log(e);
 });
